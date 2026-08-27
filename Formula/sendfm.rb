@@ -15,32 +15,33 @@ class Sendfm < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-darwin-arm64.tar.gz"
-      sha256 "63442b5efe78f60f671c2e982a568a66bfc722dfd5cd5523e32dbf082900e78f"
+      url "https://github.com/slingshot/bolter/releases/download/v0.2.0/sendfm-0.2.0-darwin-arm64.tar.gz"
+      sha256 "f4b48760d457b4ccabb22788a1e4f12e872835022964cbbb45e7980d6ef0fb08"
     end
     on_intel do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-darwin-x64.tar.gz"
-      sha256 "9bef2929af1971d8d36154c4cd47b7911fd697f17985cbfa05082cb2446dc6a2"
+      url "https://github.com/slingshot/bolter/releases/download/v0.2.0/sendfm-0.2.0-darwin-x64.tar.gz"
+      sha256 "8860b666244a2f4f990f69247696260b5f099df07600354aceb87399670c007e"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-linux-arm64.tar.gz"
-      sha256 "57b86ce9799ba506e718f4ad7ef7bf048258fb16b4b7219c2c7e7b9d5cc8bc7e"
+      url "https://github.com/slingshot/bolter/releases/download/v0.2.0/sendfm-0.2.0-linux-arm64.tar.gz"
+      sha256 "2d08b742abcc9097dad689e5c6c18d2ee1b715b41f768c4fe6f416c0463fed55"
     end
     on_intel do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-linux-x64.tar.gz"
-      sha256 "72b1117b27511e4dc49027d99b2c742727da0720c8ce9d90207496b65a6b607b"
+      url "https://github.com/slingshot/bolter/releases/download/v0.2.0/sendfm-0.2.0-linux-x64.tar.gz"
+      sha256 "c8b7ef7bf9805ea4f8e202dcddce6997d241743e6c7738b72b5116d50f83ae2b"
     end
   end
 
   def install
     bin.install "sendfm"
     # Runs `sendfm completions <shell>` during install and captures stdout.
-    # Only correct from v0.1.1: before that the plugin named the script after
-    # `process.cwd()`, so this would have installed a completion bound to
-    # whichever directory the build ran in.
+    # Only correct from v0.1.1: v0.1.0 named the script after `process.cwd()`,
+    # so this would have installed a completion bound to whichever directory
+    # the build ran in. The generator that did that is gone — the name now
+    # comes from the CLI's own definition and nothing reads the filesystem.
     generate_completions_from_executable(bin/"sendfm", "completions", shells: [:bash, :zsh, :fish])
   end
 
