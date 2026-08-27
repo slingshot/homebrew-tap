@@ -15,28 +15,33 @@ class Sendfm < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.0/sendfm-0.1.0-darwin-arm64.tar.gz"
-      sha256 "678531d3e137ec925044b9ff5575554a245dfccf96fbac43f3173462f2bce90d"
+      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-darwin-arm64.tar.gz"
+      sha256 "63442b5efe78f60f671c2e982a568a66bfc722dfd5cd5523e32dbf082900e78f"
     end
     on_intel do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.0/sendfm-0.1.0-darwin-x64.tar.gz"
-      sha256 "9b624ad30a10ccf63c07c25de6ba1ad5a2f707caa1116c1543969abfa2f4fbf3"
+      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-darwin-x64.tar.gz"
+      sha256 "9bef2929af1971d8d36154c4cd47b7911fd697f17985cbfa05082cb2446dc6a2"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.0/sendfm-0.1.0-linux-arm64.tar.gz"
-      sha256 "7d9b4fdbd1845d0656b18312c4110952a811430da4a82509df474113b9fc60da"
+      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-linux-arm64.tar.gz"
+      sha256 "57b86ce9799ba506e718f4ad7ef7bf048258fb16b4b7219c2c7e7b9d5cc8bc7e"
     end
     on_intel do
-      url "https://github.com/slingshot/bolter/releases/download/v0.1.0/sendfm-0.1.0-linux-x64.tar.gz"
-      sha256 "0f12c2273e42f39d9eac9cb41ea49631de76f463c9eda59387a5248724bad4bd"
+      url "https://github.com/slingshot/bolter/releases/download/v0.1.1/sendfm-0.1.1-linux-x64.tar.gz"
+      sha256 "72b1117b27511e4dc49027d99b2c742727da0720c8ce9d90207496b65a6b607b"
     end
   end
 
   def install
     bin.install "sendfm"
+    # Runs `sendfm completions <shell>` during install and captures stdout.
+    # Only correct from v0.1.1: before that the plugin named the script after
+    # `process.cwd()`, so this would have installed a completion bound to
+    # whichever directory the build ran in.
+    generate_completions_from_executable(bin/"sendfm", "completions", shells: [:bash, :zsh, :fish])
   end
 
   test do
